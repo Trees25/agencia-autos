@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
+import { useEffect, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "../supabaseClient";
 
 export default function Navbar() {
   const [session, setSession] = useState(null);
@@ -11,44 +11,79 @@ export default function Navbar() {
       setSession(session);
     });
 
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session);
-    });
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
 
     return () => listener.subscription.unsubscribe();
   }, []);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    navigate('/login');
+    navigate("/login");
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container">
-        <Link className="navbar-brand" to="/">Agencia de Autos</Link>
-        <div className="collapse navbar-collapse">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/">Catálogo</Link>
-            </li>
-            {session && (
+    <header>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div className="container">
+          <Link className="navbar-brand" to="/">
+            <img
+              src="img/logo-removebg-preview (2).png"
+              alt="MolinAutos Logo"
+              width="150"
+            />
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/admin">Admin</Link>
+                <Link className="nav-link" to="/">
+                  <i className="bi bi-house-door"></i> Inicio
+                </Link>
               </li>
-            )}
-            {!session ? (
               <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
+                <Link className="nav-link" to="/catalogo">
+                  <i className="bi bi-car-front"></i> Autos
+                </Link>
               </li>
-            ) : (
-              <li className="nav-item">
-                <button className="btn btn-link nav-link" onClick={handleLogout}>Logout</button>
-              </li>
-            )}
-          </ul>
+
+              {!session ? (
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    <i className="bi bi-box-arrow-in-right"></i> Login
+                  </Link>
+                </li>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/admin">
+                      <i className="bi bi-gear"></i> Admin
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-link nav-link"
+                      onClick={handleLogout}
+                    >
+                      <i className="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 }

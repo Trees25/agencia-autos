@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
-import { supabase } from "../supabaseClient";
+// ProtectedRoute.jsx
+import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { supabase } from '../supabaseClient';
 
-export default function PrivateRoute({ children }) {
+export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [session, setSession] = useState(null);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
       setLoading(false);
     });
 
@@ -21,7 +22,7 @@ export default function PrivateRoute({ children }) {
     };
   }, []);
 
-  if (loading) return <div className="text-center mt-5">Cargando...</div>;
+  if (loading) return <div>Cargando...</div>;
 
-  return session ? children : <Navigate to="/login" />;
+  return session ? children : <Navigate to="/login" replace />;
 }
