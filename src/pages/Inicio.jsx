@@ -2,9 +2,15 @@ import React from 'react';
 import Carousel from '../components/Carousel.js';
 import AboutUs from '../components/AboutUs.js';
 import Location from '../components/Location.js';
-import Footer from '../components/Footer.js'
+import Footer from '../components/Footer.js';
 
 const Home = () => {
+  const whatsappNumber = "5492645051543"; 
+
+  // Mensajes predefinidos
+  const mensajeCotizacion = "Hola, quiero cotizar mi vehículo.";
+  const mensajeConsignacion = "Hola, quiero consultar sobre consignaciones.";
+
   return (
     <>
       <main>
@@ -19,10 +25,30 @@ const Home = () => {
             <div className="row justify-content-center">
               <div className="col-md-8">
                 <div className="d-flex flex-wrap justify-content-center gap-3">
-                  <a href="/autos" className="btn btn-dark btn-lg">Busca tu vehículo</a>
-                  <a href="/contact" className="btn btn-dark btn-lg">Pedí tu vehículo</a>
-                  <a href="/contact" className="btn btn-dark btn-lg">Cotiza tu vehículo</a>
-                  <a href="/contact" className="btn btn-dark btn-lg">Consignaciones</a>
+                  {/* Busca tu vehículo → Catálogo */}
+                  <a href="/catalogo" className="btn btn-dark btn-lg">
+                    Busca tu vehículo
+                  </a>
+
+                  {/* Cotiza tu vehículo → WhatsApp */}
+                  <a
+                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeCotizacion)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-dark btn-lg"
+                  >
+                    Cotiza tu vehículo
+                  </a>
+
+                  {/* Consignaciones → WhatsApp */}
+                  <a
+                    href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(mensajeConsignacion)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-dark btn-lg"
+                  >
+                    Consignaciones
+                  </a>
                 </div>
               </div>
             </div>

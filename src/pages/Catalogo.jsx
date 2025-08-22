@@ -23,7 +23,7 @@ export default function Catalogo() {
     if (!error) setAutos(data || []);
   };
 
-  const adminWsp = "5492645851326";
+  const adminWsp = "5492645051543";
 
   const openModal = (auto, index = 0) => {
     setSelectedAuto(auto);
