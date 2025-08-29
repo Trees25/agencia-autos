@@ -53,7 +53,7 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/catalogo">
-                  <i className="bi bi-car-front"></i> Catalogo
+                  <i className="bi bi-car-front"></i> Catálogo
                 </Link>
               </li>
 

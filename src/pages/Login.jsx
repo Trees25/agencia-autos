@@ -15,7 +15,7 @@ export default function Login() {
   };
 
   return (
-  <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+  <div className="d-flex justify-content-center vh-100 bg-light align-items-start align-items-md-center pt-5 pt-md-0">
     <div className="p-4 rounded shadow" style={{ width: "350px", backgroundColor: "white" }}>
       <h2 className="text-center mb-4">Ingreso de administrador</h2>
       <form onSubmit={handleLogin}>
