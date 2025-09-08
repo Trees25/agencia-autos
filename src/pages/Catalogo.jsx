@@ -110,10 +110,6 @@ export default function Catalogo() {
                           <li>
                             <strong>Transmisión:</strong> {auto.transmision}
                           </li>
-                          <li>
-                            <strong>Precio:</strong> $
-                            {auto.precio?.toLocaleString()}
-                          </li>
                         </ul>
 
                         {/* Contenedor de botones centrado */}

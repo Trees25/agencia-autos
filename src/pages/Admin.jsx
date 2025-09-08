@@ -12,7 +12,6 @@ export default function Admin() {
     km: '',
     motor: '',
     transmision: '',
-    rendimiento: '',
     caracteristicas: '',
     estado: '',
     color: '',
@@ -144,7 +143,6 @@ export default function Admin() {
       km: parseInt(form.km),
       motor: form.motor,
       transmision: form.transmision,
-      rendimiento: form.rendimiento,
       caracteristicas: form.caracteristicas,
       estado: form.estado,
       color: form.color,
@@ -164,7 +162,7 @@ export default function Admin() {
       alert("✅ Auto agregado correctamente");
       setForm({
         marca: '', modelo: '', anio: '', km: '', motor: '', transmision: '',
-        rendimiento: '', caracteristicas: '', estado: '', color: '',
+        caracteristicas: '', estado: '', color: '',
         combustible: '', precio: '', status: '', comentario: '', imagenes: [], archivosImagenes: null
       });
       fetchAutos();
@@ -183,7 +181,7 @@ export default function Admin() {
     const updateData = {
       caracteristicas: editAuto.caracteristicas,
       estado: editAuto.estado,
-      precio: parseFloat(editAuto.precio) || 0,
+      combustible: editAuto.combustible,
       comentario: editAuto.comentario,
       status: editAuto.status,
       actualizado: new Date().toISOString(),
@@ -197,6 +195,7 @@ export default function Admin() {
     if (error) alert("Error al actualizar: " + error.message);
     else { fetchAutos(); setEditAuto(null); }
   };
+
 
   const handleDeleteAuto = async (id) => {
     if (!window.confirm("¿Seguro que quieres eliminar este auto?")) return;
@@ -229,7 +228,6 @@ export default function Admin() {
           <option value="Manual">Manual</option>
           <option value="Automático">Automático</option>
         </select>
-        <input className="form-control mb-2" name="rendimiento" placeholder="Rendimiento" value={form.rendimiento} onChange={handleInput} />
         <input className="form-control mb-2" name="caracteristicas" placeholder="Características" value={form.caracteristicas} onChange={handleInput} />
         <select className="form-select mb-2" name="estado" value={form.estado} onChange={handleInput} required>
           <option value="">Selecciona estado</option>
@@ -241,6 +239,7 @@ export default function Admin() {
           <option value="">Selecciona combustible</option>
           <option value="Nafta">Nafta</option>
           <option value="Gasoil">Gasoil</option>
+          <option value="Gasoil">GNC</option>
         </select>
         <input className="form-control mb-2" name="precio" type="number" placeholder="Precio" value={form.precio} onChange={handleInput} />
         <select className="form-select mb-2" name="status" value={form.status} onChange={handleInput} required>
@@ -453,42 +452,45 @@ export default function Admin() {
                 <option value="Usado">Usado</option>
                 <option value="Nuevo">Nuevo</option>
               </select>
-
-              {/* Precio */}
-              <label htmlFor="edit-precio" className="form-label">Precio</label>
-              <input
-                id="edit-precio"
-                name="precio"
-                className="form-control mb-2"
-                type="number"
-                placeholder="Precio"
-                value={editAuto?.precio || ''}
-                onChange={e => setEditAuto(prev => ({ ...prev, precio: e.target.value }))}
-              />
-
-              {/* Estado de venta */}
-              <label htmlFor="edit-status" className="form-label">Estado de venta</label>
+              
+              {/* Combustible ✅ */}
+              <label htmlFor="edit-combustible" className="form-label">Combustible</label>
               <select
-                id="edit-status"
-                name="status"
+                id="edit-combustible"
+                name="combustible"
                 className="form-select mb-2"
-                value={editAuto?.status || ''}
-                onChange={e => setEditAuto(prev => ({ ...prev, status: e.target.value }))}
+                value={editAuto?.combustible || ''}
+                onChange={e => setEditAuto(prev => ({ ...prev, combustible: e.target.value }))}
               >
-                <option value="">Estado de venta</option>
-                <option value="Disponible">Disponible</option>
-                <option value="Vendido">Vendido</option>
-              </select>
+              <option value="">Selecciona combustible</option>
+              <option value="Nafta">Nafta</option>
+              <option value="Gasoil">Gasoil</option>
+              <option value="GNC">GNC</option>
+            </select>
 
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSaveEdit}>Guardar</button>
-            </div>
+            {/* Estado de venta */}
+            <label htmlFor="edit-status" className="form-label">Estado de venta</label>
+            <select
+              id="edit-status"
+              name="status"
+              className="form-select mb-2"
+              value={editAuto?.status || ''}
+              onChange={e => setEditAuto(prev => ({ ...prev, status: e.target.value }))}
+            >
+              <option value="">Estado de venta</option>
+              <option value="Disponible">Disponible</option>
+              <option value="Vendido">Vendido</option>
+            </select>
+
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={handleSaveEdit}>Guardar</button>
           </div>
         </div>
       </div>
-
     </div>
+
+    </div >
   );
 }

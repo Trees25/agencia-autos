@@ -17,7 +17,7 @@ const Home = () => {
         <Carousel />
         <section className="titulo">
           <div className="container my-5">
-            <h1 className="text-center mb-4">Bienvenidos a MolinAutos</h1>
+            <h1 className="text-center mb-4">Bienvenidos a Molina autos</h1>
           </div>
         </section>
         <section className="actions">
