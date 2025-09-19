@@ -54,7 +54,7 @@ const Footer = () => {
         <small>
           © {new Date().getFullYear()}{" "}
           <a
-            href="https://mail.google.com/mail/?view=cm&fs=1&to=trees.sanjuan@gmail.com"
+            href="https://treestech.dev"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white text-decoration-none"
