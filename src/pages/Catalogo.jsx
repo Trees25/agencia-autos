@@ -158,7 +158,7 @@ export default function Catalogo() {
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="mb-3">
-              {selectedAuto.marca} {selectedAuto.modelo} - Detalles
+              {selectedAuto.marca} {selectedAuto.modelo}
             </h3>
 
             {selectedAuto.imagenes?.length > 0 ? (
